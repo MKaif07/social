@@ -4,20 +4,18 @@ import { Link } from "react-router-dom";
 export default function Header() {
   const { currentUser } = useSelector((state) => state.user);
   return (
-    <nav
-      className="w-full shadow-md shadow-current"
-    >
+    <nav className="w-full shadow-md shadow-current">
       <div
         className="flex flex-row mx-auto justify-around py-3 items-center"
         style={{ background: "#B0D9B1" }}
       >
         <Link to="/">
-          <h1 className="text-4xl font-semibold cursor-pointer">Social</h1>
+          <h1 className="text-2xl font-bold cursor-pointer">Social</h1>
         </Link>
         <form>
           <div
             className="p-2 font-semibold"
-            style={{ border: "2px #618264 solid" }}
+            style={{ background: "#D0E7D2", border: "2px #618264 solid" }}
           >
             <input
               type="text"
@@ -27,7 +25,7 @@ export default function Header() {
             <button>O</button>
           </div>
         </form>
-        <ul className="flex gap-4 font-semibold text-xl cursor-pointer">
+        <ul className="flex gap-4 text-xl cursor-pointer">
           <Link to="/">
             <li>Home</li>
           </Link>

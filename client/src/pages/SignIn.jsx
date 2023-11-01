@@ -7,6 +7,7 @@ import {
   signInStart,
   signInSuccess,
 } from "../redux/userSlice";
+import OAuth from "../components/OAuth";
 
 export default function SignIn() {
   const [formData, setFormData] = useState({});
@@ -73,13 +74,14 @@ export default function SignIn() {
           onChange={handleChange}
         />
         <button
-          className="placeholder-current focus:outline-none p-2 my-3 font-semibold text-xl"
+          className="placeholder-current focus:outline-none p-2 my-3 font-semibold text-xl rounded-lg uppercase"
           style={{ background: "#B0D9B1", border: "2px #618264 solid" }}
           type="submit"
           disabled={loading}
         >
           {loading ? "loading..." : "Sign in"}
         </button>
+        <OAuth />
       </form>
       <div className="flex gap-1">
         <p style={{ color: "#79AC78" }}>Don't Have an account?</p>
