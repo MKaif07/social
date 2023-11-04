@@ -8,18 +8,11 @@ import {
   uploadBytesResumable,
 } from "firebase/storage";
 import { app } from "../firebase";
-// import {
-//   updateUserStart,
-//   updateUserSuccess,
-//   updateUserFailure,
-//   deleteUserFailure,
-//   deleteUserStart,
-//   deleteUserSuccess,
-//   signOutUserStart,
-//   signInFailure,
-// } from "../redux/userSlice";
 import { Link } from "react-router-dom";
 import {
+  deleteUserFailure,
+  deleteUserSuccess,
+  signOutUserStart,
   udpateUserFail,
   udpateUserStart,
   udpateUserSuccess,
@@ -33,9 +26,7 @@ export default function Profile() {
   const [fileUploadError, setFileUploadError] = useState(false);
   const [formData, setFormData] = useState({});
   const [updateSuccess, setUpdateSuccess] = useState(false);
-  const [showListingsError, setShowListingsError] = useState(false);
   const dispatch = useDispatch();
-  const [userListings, setUserListings] = useState([]);
   console.log(formData);
 
   useEffect(() => {
@@ -100,7 +91,22 @@ export default function Profile() {
 
   const handleDeleteUser = async () => {};
 
-  const handleSignOut = async () => {};
+  const handleSignOut = async () => {
+    console.log('signing out');
+    try {
+      dispatch(signOutUserStart());
+      const res = await fetch("/api/auth/signout");
+      const data = await res.json();
+      if (data.success === false) {
+        dispatch(signInFailure(data.message));
+        return;
+      }
+      dispatch(deleteUserSuccess(data));
+      console.log('signing out');
+    } catch (error) {
+      dispatch(deleteUserFailure(data.message));
+    }
+  };
 
   return (
     <div className="p-3 max-w-lg mx-auto">

@@ -7,6 +7,11 @@
   color: #618264;
 }
 
+hr {
+  border-top: 1px solid #618264;
+  opacity: 30%;
+}
+
 /* darkest: 618264 */
 /*  ^: 79AC78 */
 /*  ^: B0D9B1 */

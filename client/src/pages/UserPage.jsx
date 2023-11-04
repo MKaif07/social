@@ -2,17 +2,17 @@ import React from "react";
 import UserSide from "../components/UserSide";
 import PostCenter from "../components/PostCenter";
 import FriendSide from "../components/FriendSide";
-import Feed from "../components/Feed";
 
-export default function Home() {
+export default function UserPage() {
   return (
-    <div className="flex flex-row justify-around">
-      <UserSide />
-      <div className="flex flex-col">
-        <PostCenter />
-        <Feed />
+    <div className="flex flex-row gap-7 align-middle">
+      <div className="flex flex-col justify-around">
+        <UserSide />
+        <FriendSide />
       </div>
-      <FriendSide />
+      <div className="flex flex-row">
+        <PostCenter />
+      </div>
     </div>
   );
 }
