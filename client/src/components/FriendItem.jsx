@@ -10,7 +10,7 @@ export default function FriendItem({
   const { currentUser } = useSelector((state) => state.user);
   const friends = currentUser.friends;
 
-  console.log(friendPicture);
+  console.log("friend: ", friendPicture);
 
   return (
     <div

@@ -43,23 +43,17 @@ export const addRemoveFriend = async (req, res, next) => {
     if (user.friends.includes(friendId)) {
       user.friends = user.friends.filter((id) => id !== friendId);
       friend.friends = friend.friends.filter((id) => id !== id);
-      console.log("req accepted");
     } else {
       user.friends.push(friendId);
       friend.friends.push(id);
-      console.log("friend rejected");
     }
-    console.log("saving friend");
 
     await user.save();
     await friend.save();
-    console.log("saved friend");
 
     const friends = await Promise.all(
       user.friends.map((id) => User.findById(id))
     );
-
-    console.log("my friends", friends);
 
     const formattedFriends = friends.map(
       ({ _id, firstName, lastName, occupation, location, picturePath }) => {
@@ -67,9 +61,7 @@ export const addRemoveFriend = async (req, res, next) => {
       }
     );
 
-    // console.log(formattedFriends);
     res.status(200).json(formattedFriends);
-    console.log("friend achieved");
   } catch (err) {
     // res.status(404).json({ message: err.message });
     next(err);
@@ -94,4 +86,3 @@ export const getUserFriends = async (req, res) => {
     res.status(404).json({ message: err.message });
   }
 };
-

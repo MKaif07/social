@@ -8,14 +8,12 @@ export default function FriendSide() {
   const dispatch = useDispatch();
   const { currentUser } = useSelector((state) => state.user);
   const friends = useSelector((state) => state.user.currentUser?.friends);
-  // console.log("my friends", friends);
 
   const getFriends = async () => {
     const response = await fetch(`/api/user/${currentUser._id}/friends`, {
       method: "GET",
     });
     const data = await response.json();
-    // console.log("friends data", data);
 
     dispatch(setFriends(data));
   };
@@ -24,12 +22,10 @@ export default function FriendSide() {
     getFriends();
   }, []);
 
-  // const isFriend = friends.map((userfriend)=> friend._id)
-
   return (
     <>
       <div
-        className="w-80 h-fit py-4 shadow-lg mx-10 mt-7  rounded-lg"
+        className="w-[352px] h-fit py-3 shadow-lg mx-10 mt-10 rounded-lg"
         style={{ background: "#B0D9B1" }}
       >
         <h1 className="text-2xl ml-7">Friends List</h1>
@@ -50,7 +46,7 @@ export default function FriendSide() {
                   subtitle={friend.occupation}
                   userRef={friend._id}
                   userId={currentUser._id}
-                  isFriend={friend._id === currentUser._id}
+                  isFriend={true}
                 />
               </li>
             ))}

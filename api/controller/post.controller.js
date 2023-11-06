@@ -20,7 +20,7 @@ export const createPost = async (req, res, next) => {
     });
     await newPost.save();
 
-    const posts = await Post.find();
+    const posts = await Post.find().sort({ updatedAt: -1 });
     res.status(201).json(posts);
   } catch (error) {
     next(error);
@@ -29,7 +29,7 @@ export const createPost = async (req, res, next) => {
 
 export const getAllPosts = async (req, res, next) => {
   try {
-    const posts = await Post.find();
+    const posts = await Post.find().sort({ updatedAt: -1 });
     res.status(200).json(posts);
   } catch (error) {
     next(error);

@@ -28,12 +28,22 @@ const postSlice = createSlice({
       state.loading = false;
     },
     setPost: (state, action) => {
-      // console.log("called state setPost");
       const updatedPosts = state.posts.map((post) => {
         if (post._id === action.payload._id) return action.payload;
         return post;
       });
       state.posts = updatedPosts;
+    },
+    setNewPostStart: (state) => {
+      state.loading = true;
+    },
+    setNewPostSuccess: (state, action) => {
+      state.posts = action.payload;
+      state.loading = false;
+    },
+    setNewPostFail: (state, action) => {
+      state.error = action.payload;
+      state.loading = false;
     },
   },
 });
@@ -44,5 +54,8 @@ export const {
   postFetchSuccess,
   postFetchFail,
   setPost,
+  setNewPostStart,
+  setNewPostSuccess,
+  setNewPostFail,
 } = postSlice.actions;
 export default postSlice.reducer;

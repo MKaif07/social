@@ -64,13 +64,15 @@ export default function Post({ post }) {
         <div className="px-4 pb-2">
           <h1>{post.description}</h1>
         </div>
-        <div className="rounded-xl px-4">
-          <img
-            src={post.picturePath}
-            alt="post img"
-            className="h-80 w-full object-cover rounded-xl"
-          />
-        </div>
+        {post.picturePath && (
+          <div className="rounded-xl px-4">
+            <img
+              src={post.picturePath}
+              alt="post img"
+              className="h-80 w-[30rem] object-cover rounded-xl"
+            />
+          </div>
+        )}
       </div>
       <div className="flex flex-row justify-between items-center px-4 pt-2">
         <div className="flex gap-4">

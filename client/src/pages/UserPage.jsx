@@ -5,13 +5,15 @@ import FriendSide from "../components/FriendSide";
 
 export default function UserPage() {
   return (
-    <div className="flex flex-row gap-7 align-middle">
-      <div className="flex flex-col justify-around">
-        <UserSide />
-        <FriendSide />
-      </div>
-      <div className="flex flex-row">
-        <PostCenter />
+    <div className="flex justify-around">
+      <div className="flex gap-7">
+        <div className="flex flex-col justify-around">
+          <UserSide />
+          <FriendSide />
+        </div>
+        <div className="flex flex-row">
+          <PostCenter />
+        </div>
       </div>
     </div>
   );
