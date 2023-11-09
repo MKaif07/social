@@ -28,20 +28,12 @@ export default function FriendBar({
 
   return (
     <div className="flex flex-row justify-between px-4 items-center">
-      {
-        (userPicture = "" && (
-          <h1 className="text-3xl text-red-700">{userPicture}</h1>
-        ))
-      }
       <div className="flex flex-row gap-4 py-3">
         <div className="w-14 h-15 rounded-full">
           <img
-            src={
-              userPicture ||
-              "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
-            }
+            src={userPicture}
             alt="img"
-            className="w-14 h-15 rounded-full"
+            className="w-[3.5rem] h-[3.5rem] object-cover rounded-full"
           />
         </div>
         <div>

@@ -16,6 +16,7 @@ import {
   setNewPostSuccess,
   setPost,
 } from "../redux/postSlice";
+import { validator } from "../utils/Validator";
 
 export default function PostCenter() {
   const dispatch = useDispatch();
@@ -28,7 +29,6 @@ export default function PostCenter() {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
-    console.log(formData);
   };
 
   const handleUpload = async (file) => {
@@ -36,16 +36,37 @@ export default function PostCenter() {
     const fileName = new Date().getTime() + file[0].name;
     const storageRef = ref(storage, fileName);
     const uploadTask = uploadBytesResumable(storageRef, file[0]);
-    // console.log("logging drop/selected file", file);
 
-    uploadTask.on("state_changed", async () => {
-      getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-        setFormData((prevState) => ({
-          ...prevState,
-          picturePath: downloadURL,
-        }));
-      });
-    });
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        // Progress tracking logic
+        const progress =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        console.log(`Upload progress: ${progress.toFixed(2)}%`);
+      },
+      (error) => {
+        // Handle errors here
+        console.error("Upload error:", error);
+      },
+      () => {
+        // Upload complete logic
+        getDownloadURL(uploadTask.snapshot.ref)
+          .then((downloadURL) => {
+            if (downloadURL) {
+              setFormData((prevState) => ({
+                ...prevState,
+                picturePath: downloadURL,
+              }));
+              console.log("URL retrieved:", downloadURL);
+            }
+          })
+          .catch((downloadError) => {
+            // Handle download URL retrieval error
+            console.error("Download URL error:", downloadError);
+          });
+      }
+    );
   };
 
   const onDrop = useCallback((acceptedFiles) => {
@@ -60,6 +81,14 @@ export default function PostCenter() {
   });
 
   const handlePost = async (e) => {
+    const validated = validator(formData);
+    if (Object.keys(validated).length < 2) {
+      console.log("atleast add desc or a picture");
+      return;
+    }
+
+    document.getElementById("description").value = "";
+
     try {
       dispatch(setNewPostStart());
       const res = await fetch("/api/post/create", {
@@ -77,13 +106,16 @@ export default function PostCenter() {
     }
   };
 
+  useEffect(() => {
+    console.log(formData);
+  }, [formData]);
+
   return (
     <div
-      className="flex flex-col rounded-lg w-[540px] h-fit py-7 shadow-lg mt-10 mb-7"
+      className="flex flex-col rounded-lg w-[90%] m-auto lg:w-[540px] h-fit py-7 shadow-lg mt-10 mb-7"
       style={{ background: "#B0D9B1" }}
     >
-      {/* {progress && <h1 className="text-3xl text-red-700">{progress}</h1>} */}
-      <div className="flex flex-row px-7 gap-7 align-middle items-center rounded-xl">
+      <div className="flex flex-row px-3 gap-3 md:px-7 md:gap-7 align-middle items-center rounded-xl">
         <img
           src={currentUser.picturePath}
           alt="img"
@@ -138,23 +170,35 @@ export default function PostCenter() {
           </span>
           Clip
         </div>
-        <div className="flex items-center gap-1 cursor-pointer">
+
+        <div className="hidden lg:flex items-center gap-1 cursor-pointer">
           <span>
             <GoPaperclip size={20} />
           </span>
           Attachment
         </div>
-        <div className="flex items-center gap-1 cursor-pointer">
+        <div className="hidden lg:flex items-center gap-1 cursor-pointer">
           <span>
             <AiFillAudio size={20} />
           </span>
           Audio
         </div>
+
         <button
           className="px-3 py-1 rounded-2xl align-middle uppercase"
-          style={{ background: "#79AC78" }}
-          type="button"
+          style={{
+            background: "#79AC78",
+          }}
+          // style={{
+          // background:
+          //   Object.keys(formData).length < 2 ? "rgb(239, 68, 68)" : "#79AC78",
+          //   cursor:
+          //     Object.keys(formData).length < 2 ? "not-allowed" : "pointer",
+          //   color: Object.keys(formData).length < 2 ? "white" : "inherit",
+          // }}
+          type="submit"
           onClick={handlePost}
+          // disabled={Object.keys(formData).length < 2}
         >
           post
         </button>

@@ -9,7 +9,7 @@ export default function UserSide() {
   return (
     <>
       <div
-        className="w-[352px] h-fit py-3 shadow-lg ml-10 mt-10 rounded-lg"
+        className="md:block lg:block w-[90%] mx-auto lg:w-[352px] h-fit py-3 shadow-lg my-5 md:my-10 rounded-lg"
         style={{ background: "#B0D9B1" }}
       >
         <FriendBar
@@ -17,24 +17,7 @@ export default function UserSide() {
           firstName={currentUser.firstName}
           lastName={currentUser.lastName}
           subtitle={`${currentUser.friends.length} friends`}
-          // userRef={currentUser.userRef}
-          // userId={currentUser._id}
-          // isFriend={isFriend}
         />
-        {/* <div className="flex flex-row gap-2 justify-around py-1 items-center">
-          <img
-            src={currentUser.picturePath}
-            alt="img"
-            className="w-14 h-15 rounded-full"
-          />
-          <div>
-            <h1>{`${currentUser.firstName} ${currentUser.lastName}`}</h1>
-            <p>{currentUser.friends.length} friends</p>
-          </div>
-          <Link to="/profile">
-            <BiUserCircle size={32} />
-          </Link>
-        </div> */}
         <hr className="mx-4 my-3" />
         <div className="flex flex-col ">
           <div className="flex flex-row justify-start gap-3 px-5 items-center">

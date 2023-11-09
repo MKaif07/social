@@ -14,7 +14,6 @@ export default function Feed() {
     (state) => state.post
   );
 
-
   useEffect(() => {
     const fetchPost = async () => {
       try {
@@ -40,7 +39,7 @@ export default function Feed() {
 
   return (
     <div
-      className="flex flex-col justify-around rounded-xl"
+      className="flex flex-col w-[90%] md:w-[100%] m-auto justify-around rounded-xl"
       // style={{ background: "#B0D9B1" }}
     >
       <ul className=" mt-1 mb-7">

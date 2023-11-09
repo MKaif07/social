@@ -6,13 +6,20 @@ import Feed from "../components/Feed";
 
 export default function Home() {
   return (
-    <div className="flex flex-row justify-around">
-      <UserSide />
+    <>
+      <div className="hidden md:flex md:flex-row justify-around">
+        <UserSide />
+        <div className="flex flex-col">
+          <PostCenter />
+          <Feed />
+        </div>
+        <FriendSide />
+      </div>
+      
       <div className="flex flex-col">
         <PostCenter />
         <Feed />
       </div>
-      <FriendSide />
-    </div>
+    </>
   );
 }

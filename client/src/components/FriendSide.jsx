@@ -25,7 +25,7 @@ export default function FriendSide() {
   return (
     <>
       <div
-        className="w-[352px] h-fit py-3 shadow-lg mx-10 mt-10 rounded-lg"
+        className="w-[90%] md:block lg:block lg:w-[352px] h-fit py-3 shadow-lg mx-auto mt-3 lg:mt-10 rounded-lg"
         style={{ background: "#B0D9B1" }}
       >
         <h1 className="text-2xl ml-7">Friends List</h1>
@@ -33,12 +33,6 @@ export default function FriendSide() {
           {friends &&
             friends.map((friend) => (
               <li className="py-1" key={friend._id}>
-                {/* <FriendItem
-                  friendPicture={friend.picturePath}
-                  firstName={friend.firstName}
-                  lastName={friend.lastName}
-                  occupation={friend.occupation}
-                /> */}
                 <FriendBar
                   userPicture={friend.picturePath}
                   firstName={friend.firstName}

@@ -60,8 +60,8 @@ export default function Post({ post }) {
         userId={currentUser._id}
         isFriend={isFriend}
       />
-      <div>
-        <div className="px-4 pb-2">
+      <div className="mx-auto">
+        <div className="px-4 pb-2 font-bold">
           <h1>{post.description}</h1>
         </div>
         {post.picturePath && (
