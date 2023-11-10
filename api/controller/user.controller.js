@@ -86,3 +86,19 @@ export const getUserFriends = async (req, res) => {
     res.status(404).json({ message: err.message });
   }
 };
+
+export const getUser = async (req, res, next) => {
+  try {
+    const { userId } = req.params;
+
+    const user = await User.findById(userId);
+    if (!user) {
+      return next(errorHandler(404, "User does not exist"));
+    }
+    const { password: pass, ...rest } = user._doc;
+
+    res.json(rest).status(200);
+  } catch (error) {
+    next(error);
+  }
+};

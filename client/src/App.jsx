@@ -9,6 +9,7 @@ import Contact from "./pages/Contact";
 import About from "./pages/About";
 import LoggedIn from "./components/LoggedIn";
 import UserPage from "./pages/UserPage";
+import FriendPage from "./pages/FriendPage";
 
 export default function App() {
   return (
@@ -24,6 +25,7 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/profile" element={<UserPage />} />
           <Route path="/profile/edit" element={<Profile />} />
+          <Route path="/user/:id" element={<FriendPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

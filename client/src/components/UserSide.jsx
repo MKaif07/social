@@ -4,7 +4,16 @@ import { FaLocationDot, FaSuitcase, FaTwitter } from "react-icons/fa6";
 import { FiEdit2 } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import FriendBar from "./FriendBar";
-export default function UserSide() {
+export default function UserSide({
+  picture,
+  firstName,
+  lastName,
+  subtitle,
+  location,
+  occupation,
+  viewedProfile,
+  impressions,
+}) {
   const { currentUser } = useSelector((state) => state.user);
   return (
     <>
@@ -13,31 +22,31 @@ export default function UserSide() {
         style={{ background: "#B0D9B1" }}
       >
         <FriendBar
-          userPicture={currentUser.picturePath}
-          firstName={currentUser.firstName}
-          lastName={currentUser.lastName}
-          subtitle={`${currentUser.friends.length} friends`}
+          userPicture={picture}
+          firstName={firstName}
+          lastName={lastName}
+          subtitle={`${subtitle} friends`}
         />
         <hr className="mx-4 my-3" />
         <div className="flex flex-col ">
           <div className="flex flex-row justify-start gap-3 px-5 items-center">
             <FaLocationDot />
-            <p>{currentUser.location}</p>
+            <p>{location}</p>
           </div>
           <div className="flex flex-row justify-start gap-3 px-5 items-center">
             <FaSuitcase />
-            <p>{currentUser.occupation}</p>
+            <p>{occupation}</p>
           </div>
         </div>
         <hr className="mx-4 my-3" />
         <div className="flex flex-col text-sm">
           <div className="flex flex-row justify-between px-5 gap-3">
             <p>Who's viewed your profile</p>
-            <p>{currentUser.viewedProfile}</p>
+            <p>{viewedProfile}</p>
           </div>
           <div className="flex flex-row justify-between px-5 gap-3">
             <p>impression</p>
-            <p>{currentUser.impressions}</p>
+            <p>{impressions}</p>
           </div>
         </div>
         <hr className="mx-4 my-3" />

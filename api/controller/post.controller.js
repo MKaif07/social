@@ -20,7 +20,7 @@ export const createPost = async (req, res, next) => {
     });
     await newPost.save();
 
-    const posts = await Post.find().sort({ updatedAt: -1 });
+    const posts = await Post.find().sort({ createdAt: -1 });
     res.status(201).json(posts);
   } catch (error) {
     next(error);
@@ -29,8 +29,26 @@ export const createPost = async (req, res, next) => {
 
 export const getAllPosts = async (req, res, next) => {
   try {
-    const posts = await Post.find().sort({ updatedAt: -1 });
+    const posts = await Post.find().sort({ createdAt: -1 });
     res.status(200).json(posts);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const getUserPosts = async (req, res, next) => {
+  try {
+    const { id } = req.body;
+    const user = await User.findById(id);
+
+    if (!user) {
+      // throw new Error("User not found");
+      const err = new Error("User does not exist");
+      next(err);
+    }
+
+    const posts = await Post.find({ userRef: id }).sort({ createdAt: -1 });
+    res.json(posts).status(200);
   } catch (error) {
     next(error);
   }

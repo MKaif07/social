@@ -1,26 +1,47 @@
 import React, { useEffect } from "react";
 import FriendItem from "./FriendItem";
 import { useDispatch, useSelector } from "react-redux";
-import { setFriends } from "../redux/userSlice";
+import { setFriendFriends, setFriends } from "../redux/userSlice";
 import FriendBar from "./FriendBar";
+import { useLocation } from "react-router-dom";
 
 export default function FriendSide() {
   const dispatch = useDispatch();
+
+  const location = useLocation();
+  const currentPath = location.pathname;
+
   const { currentUser } = useSelector((state) => state.user);
-  const friends = useSelector((state) => state.user.currentUser?.friends);
+  const { friendData } = useSelector((state) => state.user);
+  const isFriendPage = currentPath === `/user/${friendData?._id}`;
 
   const getFriends = async () => {
-    const response = await fetch(`/api/user/${currentUser._id}/friends`, {
-      method: "GET",
-    });
+    let response;
+    isFriendPage
+      ? (response = await fetch(`/api/user/${friendData._id}/friends`, {
+          method: "GET",
+        }))
+      : (response = await fetch(`/api/user/${currentUser._id}/friends`, {
+          method: "GET",
+        }));
+
+    console.log("res: ", response);
+
     const data = await response.json();
 
-    dispatch(setFriends(data));
+    isFriendPage
+      ? dispatch(setFriendFriends(data))
+      : dispatch(setFriends(data));
   };
 
   useEffect(() => {
     getFriends();
-  }, []);
+  }, [isFriendPage]);
+
+  let friends;
+  isFriendPage
+    ? (friends = useSelector((state) => state.user.friendData?.friends))
+    : (friends = useSelector((state) => state.user.currentUser?.friends));
 
   return (
     <>
@@ -34,6 +55,7 @@ export default function FriendSide() {
             friends.map((friend) => (
               <li className="py-1" key={friend._id}>
                 <FriendBar
+                  friendId={friend._id}
                   userPicture={friend.picturePath}
                   firstName={friend.firstName}
                   lastName={friend.lastName}

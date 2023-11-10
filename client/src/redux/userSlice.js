@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   currentUser: null,
+  friendData: null,
   error: null,
   loading: false,
 };
@@ -45,6 +46,13 @@ const userSlice = createSlice({
         console.error("user friends non-existent :(");
       }
     },
+    setFriendFriends: (state, action) => {
+      if (state.friendData) {
+        state.friendData.friends = action.payload;
+      } else {
+        console.error("user friends non-existent :(");
+      }
+    },
     deleteUserStart: (state) => {
       state.loading = true;
     },
@@ -69,6 +77,17 @@ const userSlice = createSlice({
       state.error = action.payload;
       state.loading = false;
     },
+    setFriendStart: (state) => {
+      state.loading = true;
+    },
+    setFriendSuccess: (state, action) => {
+      state.friendData = action.payload;
+      state.loading = false;
+    },
+    setFriendFail: (state) => {
+      state.error = action.payload;
+      state.loading = false;
+    },
   },
 });
 
@@ -87,5 +106,9 @@ export const {
   signOutUserStart,
   signOutUserSuccess,
   signOutUserFailure,
+  setFriendStart,
+  setFriendSuccess,
+  setFriendFail,
+  setFriendFriends,
 } = userSlice.actions;
 export default userSlice.reducer;

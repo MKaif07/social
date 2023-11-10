@@ -52,6 +52,7 @@ export default function Post({ post }) {
       style={{ background: "#B0D9B1" }}
     >
       <FriendBar
+        friendId={post.userRef}
         userPicture={post.userPicturePath}
         firstName={post.firstName}
         lastName={post.lastName}
