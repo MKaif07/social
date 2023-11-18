@@ -2,24 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
-/* @layer base {
+@layer base {
   :root {
-    --color-text-base: #fff;
-    --color-text-muted: #c7d2fe;
-    --color-text-inverted: #4f46e5;
-    --color-fill: #4338ca;
-    --color-button-accent: #fff;
-    --color-button-accent-hover: #fff;
-    --color-button-accent-muted: #fff;
+    /* Light Mode Colors */
+    --primary-light: #eeeeee;
+    --secondary-light: #f7f7f7;
+    --tertiary-light: #929aab;
+    --contrasting-light: #d8d9da;
+
+    /* Dark Mode Colors */
+    --dark-primary-dark: #272829;
+    --dark-secondary-dark: #61677a;
+    --dark-tertiary-dark: #d8d9da;
+    --dark-contrasting-dark: #d8d9da;
   }
-} */
-:root {
+}
+/* :root {
   background-color: #d0e7d2;
   color: #618264;
-}
+} */
 
 hr {
-  border-top: 1px solid #618264;
+  border-top: 1px solid #272829;
   opacity: 30%;
 }
 

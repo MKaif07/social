@@ -12,6 +12,20 @@ import UserPage from "./pages/UserPage";
 import FriendPage from "./pages/FriendPage";
 
 export default function App() {
+  const colors = [
+    "bg-light-primary",
+    "bg-light-secondary",
+    "border-light-secondary",
+    "bg-light-contrasting",
+    "bg-dark-primary",
+    "bg-dark-secondary",
+    "border-dark-secondary",
+    "bg-dark-contrasting",
+    "text-light-tertiary",
+    "text-dark-tertiary",
+    "shadow-light-tertiary",
+    "shadow-dark-tertiary",
+  ];
   return (
     <BrowserRouter>
       <Header />

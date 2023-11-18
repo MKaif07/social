@@ -14,7 +14,7 @@ import { useState } from "react";
 import FriendBar from "./FriendBar";
 
 export default function Post({ post }) {
-  const { currentUser } = useSelector((state) => state.user);
+  const { currentUser, theme } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const [like, setLike] = useState(Boolean(post.likes[currentUser._id]));
   const likeCount = Object.keys(post.likes).length;
@@ -48,8 +48,8 @@ export default function Post({ post }) {
 
   return (
     <div
-      className="grid bg-transparent rounded-xl p-3"
-      style={{ background: "#B0D9B1" }}
+      className={`grid bg-${theme}-secondary rounded-xl p-3`}
+      // style={{ background: "#B0D9B1" }}
     >
       <FriendBar
         friendId={post.userRef}
@@ -90,8 +90,8 @@ export default function Post({ post }) {
           </div>
         </div>
         <div
-          className="flex w-8 h-8 items-center justify-center cursor-pointer rounded-full"
-          style={{ background: "#79AC78" }}
+          className={`flex bg-${theme}-primary w-8 h-8 items-center justify-center cursor-pointer rounded-full`}
+          // style={{ background: "#79AC78" }}
         >
           <BiShareAlt size={22} />
         </div>

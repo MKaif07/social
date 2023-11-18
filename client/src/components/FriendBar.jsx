@@ -14,7 +14,7 @@ export default function FriendBar({
   isFriend,
   friendId,
 }) {
-  const { currentUser } = useSelector((state) => state.user);
+  const { currentUser, theme } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const patchFriend = async (postUserId) => {
     const res = await fetch(`/api/user/${currentUser._id}/${postUserId}`, {
@@ -47,8 +47,8 @@ export default function FriendBar({
 
       {userRef !== userId ? (
         <div
-          className="flex rounded-full w-10 h-10 items-center justify-center cursor-pointer"
-          style={{ backgroundColor: "#79AC78" }}
+          className={`flex rounded-full bg-${theme}-primary w-10 h-10 items-center justify-center cursor-pointer`}
+          // style={{ backgroundColor: "#79AC78" }}
           onClick={() => patchFriend(userRef)}
         >
           {isFriend ? <BiUserMinus size={24} /> : <BiUserPlus size={24} />}
@@ -56,8 +56,8 @@ export default function FriendBar({
       ) : (
         // <Link to="/profile">
         <div
-          className="flex rounded-full w-10 h-10 items-center justify-center cursor-pointer"
-          style={{ backgroundColor: "#79AC78" }}
+          className={`flex rounded-full bg-${theme}-primary w-10 h-10 items-center justify-center cursor-pointer`}
+          // style={{ backgroundColor: "#79AC78" }}
         >
           <BiUserCircle size={40} />
         </div>

@@ -21,7 +21,7 @@ import { validator } from "../utils/Validator";
 export default function PostCenter() {
   const dispatch = useDispatch();
 
-  const { currentUser } = useSelector((state) => state.user);
+  const { currentUser, theme } = useSelector((state) => state.user);
   const [drop, setDrop] = useState(false);
 
   const [fileUploadError, setFileUploadError] = useState(false);
@@ -112,8 +112,8 @@ export default function PostCenter() {
 
   return (
     <div
-      className="flex flex-col rounded-lg w-[90%] m-auto lg:w-[540px] h-fit py-7 shadow-lg mt-10 mb-7"
-      style={{ background: "#B0D9B1" }}
+      className={`flex flex-col bg-${theme}-secondary rounded-lg w-[90%] m-auto lg:w-[540px] h-fit py-7 shadow-lg mt-10 mb-7`}
+      // style={{ background: "#B0D9B1" }}
     >
       <div className="flex flex-row px-3 gap-3 md:px-7 md:gap-7 align-middle items-center rounded-xl">
         <img
@@ -122,8 +122,8 @@ export default function PostCenter() {
           className="w-[3.5rem] h-[3.5rem] object-cover rounded-full"
         />
         <div
-          className="p-2 rounded-full w-full"
-          style={{ background: "#ECE3CE" }}
+          className={`bg-${theme}-contrasting text-dark-primary p-2 rounded-full w-full`}
+          // style={{ background: "#ECE3CE" }}
         >
           <input
             type="text"
@@ -185,10 +185,12 @@ export default function PostCenter() {
         </div>
 
         <button
-          className="px-3 py-1 rounded-2xl align-middle uppercase"
-          style={{
-            background: "#79AC78",
-          }}
+          className={`bg-${theme}-primary text-${theme}-tertiary px-3 py-1 rounded-2xl align-middle uppercase`}
+          style={
+            {
+              // background: "#79AC78",
+            }
+          }
           // style={{
           // background:
           //   Object.keys(formData).length < 2 ? "rgb(239, 68, 68)" : "#79AC78",

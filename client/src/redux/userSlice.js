@@ -5,6 +5,7 @@ const initialState = {
   friendData: null,
   error: null,
   loading: false,
+  theme: "dark",
 };
 
 const userSlice = createSlice({
@@ -14,6 +15,9 @@ const userSlice = createSlice({
     ready: (state) => {
       state.error = null;
       state.loading = false;
+    },
+    setTheme: (state, action) => {
+      state.theme = action.payload;
     },
     signInStart: (state) => {
       state.loading = true;
@@ -93,6 +97,7 @@ const userSlice = createSlice({
 
 export const {
   ready,
+  setTheme,
   signInStart,
   signInSuccess,
   signInFail,

@@ -14,12 +14,12 @@ export default function UserSide({
   viewedProfile,
   impressions,
 }) {
-  const { currentUser } = useSelector((state) => state.user);
+  const { currentUser, theme } = useSelector((state) => state.user);
   return (
     <>
       <div
-        className="md:block lg:block w-[90%] mx-auto lg:w-[352px] h-fit py-3 shadow-lg my-5 md:my-10 rounded-lg"
-        style={{ background: "#B0D9B1" }}
+        className={`md:block bg-${theme}-secondary lg:block w-[90%] mx-auto lg:w-[352px] h-fit py-3 shadow-lg my-5 md:my-10 rounded-lg`}
+        // style={{ background: "#B0D9B1" }}
       >
         <FriendBar
           userPicture={picture}

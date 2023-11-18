@@ -11,7 +11,7 @@ export default function FriendSide() {
   const location = useLocation();
   const currentPath = location.pathname;
 
-  const { currentUser } = useSelector((state) => state.user);
+  const { currentUser, theme } = useSelector((state) => state.user);
   const { friendData } = useSelector((state) => state.user);
   const isFriendPage = currentPath === `/user/${friendData?._id}`;
 
@@ -46,8 +46,8 @@ export default function FriendSide() {
   return (
     <>
       <div
-        className="w-[90%] md:block lg:block lg:w-[352px] h-fit py-3 shadow-lg mx-auto mt-3 lg:mt-10 rounded-lg"
-        style={{ background: "#B0D9B1" }}
+        className={`w-[90%] bg-${theme}-secondary md:block lg:block lg:w-[352px] h-fit py-3 shadow-lg mx-auto mt-3 lg:mt-10 rounded-lg`}
+        // style={{ background: "#B0D9B1" }}
       >
         <h1 className="text-2xl ml-7">Friends List</h1>
         <ul>

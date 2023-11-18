@@ -8,13 +8,15 @@ import { setFriendFriends, setFriendSuccess } from "../redux/userSlice";
 import { setPost } from "../redux/postSlice";
 
 export default function Home() {
-  const { currentUser } = useSelector((state) => state.user);
+  const { currentUser, theme } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   dispatch(setFriendSuccess(null));
 
   return (
     <>
-      <div className="hidden bg-skin-fill lg:flex lg:flex-row justify-around">
+      <div
+        className={`hidden bg-${theme}-primary text-${theme}-tertiary lg:flex lg:flex-row justify-around`}
+      >
         <UserSide
           picture={currentUser.picturePath}
           firstName={currentUser.firstName}
@@ -32,7 +34,9 @@ export default function Home() {
         <FriendSide />
       </div>
 
-      <div className="lg:hidden flex flex-col">
+      <div
+        className={`bg-${theme}-primary text-${theme}-tertiary lg:hidden flex flex-col`}
+      >
         <PostCenter />
         <Feed />
       </div>
