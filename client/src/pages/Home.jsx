@@ -14,7 +14,7 @@ export default function Home() {
 
   return (
     <>
-      <div className="hidden md:flex md:flex-row justify-around">
+      <div className="hidden bg-skin-fill lg:flex lg:flex-row justify-around">
         <UserSide
           picture={currentUser.picturePath}
           firstName={currentUser.firstName}
@@ -32,7 +32,7 @@ export default function Home() {
         <FriendSide />
       </div>
 
-      <div className="md:hidden flex flex-col">
+      <div className="lg:hidden flex flex-col">
         <PostCenter />
         <Feed />
       </div>

@@ -38,7 +38,7 @@ export default function FriendPage() {
 
   useEffect(() => {
     fetchFriend();
-  }, []);
+  }, [id]);
 
   return (
     <div className="md:flex md:justify-around w-full">

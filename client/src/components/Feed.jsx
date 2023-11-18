@@ -18,7 +18,7 @@ export default function Feed() {
   const currentPath = location.pathname;
 
   const isHomePage = currentPath === "/";
-  const isProfilePage = currentPath === "/profile" ||"/user/:id";
+  const isProfilePage = currentPath === "/profile" || "/user/:id";
   const params = useParams();
   const { id } = params;
 
@@ -55,8 +55,6 @@ export default function Feed() {
           dispatch(postFetchSuccess(data));
         }
 
-
-        
         if (isHomePage) {
           console.log("homepage");
           const res = await fetch("/api/post", {
@@ -77,11 +75,11 @@ export default function Feed() {
     };
 
     fetchPost();
-  }, []);
+  }, [id]);
 
   return (
     <div
-      className="flex flex-col w-[90%] md:w-[100%] m-auto justify-around rounded-xl"
+      className="flex flex-col rounded-lg w-[90%] m-auto lg:w-[540px] h-fit py-7 mb-7"
       // style={{ background: "#B0D9B1" }}
     >
       <ul className=" mt-1 mb-7">

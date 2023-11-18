@@ -2,6 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+/* @layer base {
+  :root {
+    --color-text-base: #fff;
+    --color-text-muted: #c7d2fe;
+    --color-text-inverted: #4f46e5;
+    --color-fill: #4338ca;
+    --color-button-accent: #fff;
+    --color-button-accent-hover: #fff;
+    --color-button-accent-muted: #fff;
+  }
+} */
 :root {
   background-color: #d0e7d2;
   color: #618264;
