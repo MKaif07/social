@@ -21,7 +21,11 @@ export default function Header() {
         // style={{ background: "#B0D9B1" }}
       >
         <Link to="/">
-          <h1 className="text-2xl font-bold cursor-pointer">Social</h1>
+          <h1 className="title font-bold cursor-pointer">
+            <span className="title-word title-word-1">So</span>
+            <span className="title-word title-word-2">ci</span>
+            <span className="title-word title-word-3">al</span>
+          </h1>
         </Link>
         <form>
           <div
