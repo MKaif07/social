@@ -3,7 +3,7 @@ import Home from "./pages/Home";
 import Header from "./components/Header";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
-import PrivateRoute from "./components/privateRoute";
+import PrivateRoute from "./components/PrivateRoute";
 import Profile from "./pages/Profile";
 import Contact from "./pages/Contact";
 import About from "./pages/About";
