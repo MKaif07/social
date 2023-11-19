@@ -73,6 +73,8 @@ export const google = async (req, res, next) => {
         picturePath: req.body.photo,
         location: "",
         occupation: "",
+        viewedProfile: Math.floor(Math.random() * 10000),
+        impressions: Math.floor(Math.random() * 10000),
       });
 
       await newUser.save();

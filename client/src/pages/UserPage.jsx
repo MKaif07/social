@@ -6,9 +6,11 @@ import Feed from "../components/Feed";
 import { useSelector } from "react-redux";
 
 export default function UserPage() {
-  const { currentUser } = useSelector((state) => state.user);
+  const { currentUser, theme } = useSelector((state) => state.user);
   return (
-    <div className="md:flex md:justify-around w-full">
+    <div
+      className={` bg-${theme}-primary text-${theme}-tertiary md:flex md:justify-around w-full`}
+    >
       <div className="lg:flex lg:gap-28">
         <div className="flex flex-col">
           <UserSide

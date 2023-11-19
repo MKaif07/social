@@ -27,15 +27,11 @@ export default function Feed() {
       try {
         dispatch(postFetchStart());
 
-        console.log(currentPath);
         if (isProfilePage) {
-          console.log("profile page!!!");
 
           const bodyJson = id
             ? JSON.stringify({ id })
             : JSON.stringify({ id: currentUser._id });
-
-          console.log("bodyJSON:", bodyJson);
 
           const res = await fetch("/api/post/get", {
             method: "POST",
@@ -56,7 +52,6 @@ export default function Feed() {
         }
 
         if (isHomePage) {
-          console.log("homepage");
           const res = await fetch("/api/post", {
             method: "GET",
           });

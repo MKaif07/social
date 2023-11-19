@@ -17,6 +17,7 @@ import {
   setPost,
 } from "../redux/postSlice";
 import { validator } from "../utils/Validator";
+import { Link } from "react-router-dom";
 
 export default function PostCenter() {
   const dispatch = useDispatch();
@@ -106,21 +107,20 @@ export default function PostCenter() {
     }
   };
 
-  useEffect(() => {
-    console.log(formData);
-  }, [formData]);
-
   return (
     <div
       className={`flex flex-col bg-${theme}-secondary rounded-lg w-[90%] m-auto lg:w-[540px] h-fit py-7 shadow-lg mt-10 mb-7`}
       // style={{ background: "#B0D9B1" }}
     >
       <div className="flex flex-row px-3 gap-3 md:px-7 md:gap-7 align-middle items-center rounded-xl">
-        <img
-          src={currentUser.picturePath}
-          alt="img"
-          className="w-[3.5rem] h-[3.5rem] object-cover rounded-full"
-        />
+        <Link to={"/profile"}>
+          <img
+            src={currentUser.picturePath}
+            alt="img"
+            className="w-[3.5rem] h-[3.5rem] object-cover rounded-full"
+          />
+        </Link>
+
         <div
           className={`bg-${theme}-contrasting text-dark-primary p-2 rounded-full w-full`}
           // style={{ background: "#ECE3CE" }}

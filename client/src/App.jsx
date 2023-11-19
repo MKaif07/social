@@ -10,6 +10,8 @@ import About from "./pages/About";
 import LoggedIn from "./components/LoggedIn";
 import UserPage from "./pages/UserPage";
 import FriendPage from "./pages/FriendPage";
+import Chat from "./pages/Chat";
+import Bugs from "./pages/Bugs";
 
 export default function App() {
   const colors = [
@@ -34,9 +36,10 @@ export default function App() {
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/sign-up" element={<SignUp />} />
         </Route>
-        <Route path="/about" element={<About />} />
+        <Route path="/bug" element={<Bugs />} />
         <Route element={<PrivateRoute />}>
           <Route path="/" element={<Home />} />
+          <Route path="/chat" element={<Chat />} />
           <Route path="/profile" element={<UserPage />} />
           <Route path="/profile/edit" element={<Profile />} />
           <Route path="/user/:id" element={<FriendPage />} />

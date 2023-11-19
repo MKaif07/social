@@ -15,7 +15,7 @@ export default function Home() {
   return (
     <>
       <div
-        className={`hidden bg-${theme}-primary text-${theme}-tertiary lg:flex lg:flex-row justify-around`}
+        className={`hidden bg-${theme}-primary text-${theme}-tertiary xl:flex xl:flex-row justify-around`}
       >
         <UserSide
           picture={currentUser.picturePath}
@@ -35,7 +35,7 @@ export default function Home() {
       </div>
 
       <div
-        className={`bg-${theme}-primary text-${theme}-tertiary lg:hidden flex flex-col`}
+        className={`bg-${theme}-primary text-${theme}-tertiary xl:hidden flex flex-col`}
       >
         <PostCenter />
         <Feed />

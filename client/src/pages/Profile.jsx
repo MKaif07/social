@@ -20,7 +20,9 @@ import {
 
 export default function Profile() {
   const fileRef = useRef(null);
-  const { currentUser, loading, error } = useSelector((state) => state.user);
+  const { currentUser, loading, error, theme } = useSelector(
+    (state) => state.user
+  );
   const [file, setFile] = useState(undefined);
   const [filePerc, setFilePerc] = useState(0);
   const [fileUploadError, setFileUploadError] = useState(false);
@@ -92,7 +94,7 @@ export default function Profile() {
   const handleDeleteUser = async () => {};
 
   const handleSignOut = async () => {
-    console.log('signing out');
+    console.log("signing out");
     try {
       dispatch(signOutUserStart());
       const res = await fetch("/api/auth/signout");
@@ -102,125 +104,122 @@ export default function Profile() {
         return;
       }
       dispatch(deleteUserSuccess(data));
-      console.log('signing out');
+      console.log("signing out");
     } catch (error) {
       dispatch(deleteUserFailure(data.message));
     }
   };
 
   return (
-    <div className="p-3 max-w-lg mx-auto">
-      <h1 className="text-3xl font-semibold text-center my-5">Profile</h1>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-        <input
-          onChange={(e) => setFile(e.target.files[0])}
-          type="file"
-          ref={fileRef}
-          hidden
-          accept="image/*"
-        />
+    <div className={`bg-${theme}-primary text-${theme}-tertiary `}>
+      <div className={`p-3 max-w-lg mx-auto`}>
+        <h1 className="text-3xl font-semibold text-center my-5">Profile</h1>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          <input
+            onChange={(e) => setFile(e.target.files[0])}
+            type="file"
+            ref={fileRef}
+            hidden
+            accept="image/*"
+          />
 
-        <img
-          onClick={() => fileRef.current.click()}
-          className="rounded-full h-24 w-24 object-cover cursor-pointer self-center mt-2"
-          src={formData?.picturePath || currentUser.picturePath}
-          alt="profile"
-        />
-        <p className="text-sm self-center">
-          {fileUploadError ? (
-            <span className="text-red-700">
-              Error Image Upload(image must be less than 5 mb)
-            </span>
-          ) : filePerc > 0 && filePerc < 100 ? (
-            <span className="text-slate-700">{`Uploading ${filePerc}%`}</span>
-          ) : filePerc === 100 ? (
-            <span className="text-green-700">Image successfully uploaded!</span>
-          ) : (
-            ""
-          )}
-        </p>
-        <input
-          type="firstName"
-          placeholder="firstName"
-          id="firstName"
-          defaultValue={currentUser.firstName}
-          className="bg-transparent placeholder-current focus:outline-none p-2 mb-2 border-2 border-dashed focus:border-solid"
-          style={{ borderColor: "#618264" }}
-          onChange={handleChange}
-        />
-        <input
-          type="lastName"
-          placeholder="lastName"
-          id="lastName"
-          defaultValue={currentUser.lastName}
-          className="bg-transparent placeholder-current focus:outline-none p-2 mb-2 border-2 border-dashed focus:border-solid"
-          style={{ borderColor: "#618264" }}
-          onChange={handleChange}
-        />
-        <input
-          type="email"
-          placeholder="email"
-          id="email"
-          defaultValue={currentUser.email}
-          className="bg-transparent placeholder-current focus:outline-none p-2 mb-2 border-2 border-dashed focus:border-solid"
-          style={{ borderColor: "#618264" }}
-          onChange={handleChange}
-        />
-        <input
-          type="password"
-          placeholder="password"
-          id="password"
-          className="bg-transparent placeholder-current focus:outline-none p-2 mb-2 border-2 border-dashed focus:border-solid"
-          style={{ borderColor: "#618264" }}
-          onChange={handleChange}
-        />
-        <input
-          type="text"
-          placeholder="location"
-          id="location"
-          defaultValue={currentUser.location}
-          // className="border p-3 rounded-lg"
-          className="bg-transparent placeholder-current focus:outline-none p-2 mb-2 border-2 border-dashed focus:border-solid"
-          style={{ borderColor: "#618264" }}
-          onChange={handleChange}
-        />
-        <input
-          type="text"
-          placeholder="occupation"
-          id="occupation"
-          defaultValue={currentUser.occupation}
-          // className="border p-3 rounded-lg"
-          className="bg-transparent placeholder-current focus:outline-none p-2 mb-2 border-2 border-dashed focus:border-solid"
-          style={{ borderColor: "#618264" }}
-          onChange={handleChange}
-        />
-        <button className="bg-slate-700 text-white rounded-lg p-3 uppercase hover:opacity-95 disabled:opacity-80">
-          {loading ? "loading..." : "update"}
-        </button>
+          <img
+            onClick={() => fileRef.current.click()}
+            className="rounded-full h-24 w-24 object-cover cursor-pointer self-center mt-2"
+            src={formData?.picturePath || currentUser.picturePath}
+            alt="profile"
+          />
+          <p className="text-sm self-center">
+            {fileUploadError ? (
+              <span className="text-red-700">
+                Error Image Upload(image must be less than 5 mb)
+              </span>
+            ) : filePerc > 0 && filePerc < 100 ? (
+              <span className="text-slate-700">{`Uploading ${filePerc}%`}</span>
+            ) : filePerc === 100 ? (
+              <span className="text-green-700">
+                Image successfully uploaded!
+              </span>
+            ) : (
+              ""
+            )}
+          </p>
+          <input
+            type="firstName"
+            placeholder="firstName"
+            id="firstName"
+            defaultValue={currentUser.firstName}
+            className="bg-transparent placeholder-current focus:outline-none p-2 mb-2 border-2 border-dashed focus:border-solid"
+            style={{ borderColor: "#618264" }}
+            onChange={handleChange}
+          />
+          <input
+            type="lastName"
+            placeholder="lastName"
+            id="lastName"
+            defaultValue={currentUser.lastName}
+            className="bg-transparent placeholder-current focus:outline-none p-2 mb-2 border-2 border-dashed focus:border-solid"
+            style={{ borderColor: "#618264" }}
+            onChange={handleChange}
+          />
+          <input
+            type="email"
+            placeholder="email"
+            id="email"
+            defaultValue={currentUser.email}
+            className="bg-transparent placeholder-current focus:outline-none p-2 mb-2 border-2 border-dashed focus:border-solid"
+            style={{ borderColor: "#618264" }}
+            onChange={handleChange}
+          />
+          <input
+            type="password"
+            placeholder="password"
+            id="password"
+            className="bg-transparent placeholder-current focus:outline-none p-2 mb-2 border-2 border-dashed focus:border-solid"
+            style={{ borderColor: "#618264" }}
+            onChange={handleChange}
+          />
+          <input
+            type="text"
+            placeholder="location"
+            id="location"
+            defaultValue={currentUser.location}
+            // className="border p-3 rounded-lg"
+            className="bg-transparent placeholder-current focus:outline-none p-2 mb-2 border-2 border-dashed focus:border-solid"
+            style={{ borderColor: "#618264" }}
+            onChange={handleChange}
+          />
+          <input
+            type="text"
+            placeholder="occupation"
+            id="occupation"
+            defaultValue={currentUser.occupation}
+            // className="border p-3 rounded-lg"
+            className="bg-transparent placeholder-current focus:outline-none p-2 mb-2 border-2 border-dashed focus:border-solid"
+            style={{ borderColor: "#618264" }}
+            onChange={handleChange}
+          />
+          <button className="bg-slate-700 text-white rounded-lg p-3 uppercase hover:opacity-95 disabled:opacity-80">
+            {loading ? "loading..." : "update"}
+          </button>
+        </form>
 
-        <Link
-          className="bg-green-700 text-white p-3 rounded-lg uppercase text-center hover:opacity-95"
-          to={"/create-listing"}
-        >
-          Create Listing
-        </Link>
-      </form>
-
-      <div className="flex justify-between mt-5">
-        <span
-          onClick={handleDeleteUser}
-          className="text-red-700 cursor-pointer"
-        >
-          Delete Account
-        </span>
-        <span onClick={handleSignOut} className="text-red-700 cursor-pointer">
-          Sign out
-        </span>
+        <div className="flex justify-between mt-5">
+          <span
+            onClick={handleDeleteUser}
+            className="text-red-700 cursor-pointer"
+          >
+            Delete Account
+          </span>
+          <span onClick={handleSignOut} className="text-red-700 cursor-pointer">
+            Sign out
+          </span>
+        </div>
+        {error && <p className="text-red-700 mt-5"> {error}</p>}
+        {updateSuccess && (
+          <p className="text-green-700 mt-5">User Updated Succesfully</p>
+        )}
       </div>
-      {error && <p className="text-red-700 mt-5"> {error}</p>}
-      {updateSuccess && (
-        <p className="text-green-700 mt-5">User Updated Succesfully</p>
-      )}
     </div>
   );
 }

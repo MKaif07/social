@@ -24,9 +24,6 @@ export default function FriendSide() {
       : (response = await fetch(`/api/user/${currentUser._id}/friends`, {
           method: "GET",
         }));
-
-    console.log("res: ", response);
-
     const data = await response.json();
 
     isFriendPage

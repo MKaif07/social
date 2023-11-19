@@ -14,9 +14,9 @@ import FriendSide from "../components/FriendSide";
 export default function FriendPage() {
   const params = useParams();
   const { id } = params;
-  const { friendData } = useSelector((state) => state.user);
+  const { friendData, theme } = useSelector((state) => state.user);
   const dispatch = useDispatch();
-  
+
   const fetchFriend = async () => {
     dispatch(setFriendStart());
     try {
@@ -41,7 +41,9 @@ export default function FriendPage() {
   }, [id]);
 
   return (
-    <div className="md:flex md:justify-around w-full">
+    <div
+      className={`bg-${theme}-primary text-${theme}-tertiary md:flex md:justify-around w-full`}
+    >
       <div className="lg:flex lg:gap-28">
         <div className="flex flex-col">
           <UserSide
