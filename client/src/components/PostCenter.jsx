@@ -21,7 +21,7 @@ import { Link } from "react-router-dom";
 
 export default function PostCenter() {
   const dispatch = useDispatch();
-
+  const [uploadedImages, setUploadedImages] = useState([]);
   const { currentUser, theme } = useSelector((state) => state.user);
   const [drop, setDrop] = useState(false);
 
@@ -59,7 +59,9 @@ export default function PostCenter() {
                 ...prevState,
                 picturePath: downloadURL,
               }));
-              console.log("URL retrieved:", downloadURL);
+              // console.log("URL retrieved:", downloadURL)
+              const uploadedUrls = downloadURL;
+              setUploadedImages(uploadedUrls);
             }
           })
           .catch((downloadError) => {
@@ -70,9 +72,83 @@ export default function PostCenter() {
     );
   };
 
-  const onDrop = useCallback((acceptedFiles) => {
-    handleUpload(acceptedFiles);
-  }, []);
+  const compressImage = async (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const img = new Image();
+        img.src = event.target.result;
+
+        img.onload = () => {
+          const maxWidth = 480;
+          const maxHeight = 320;
+
+          // Calculate the new dimensions while maintaining aspect ratio
+          let newWidth, newHeight;
+          if (img.width > img.height) {
+            newWidth = maxWidth;
+            newHeight = (img.height / img.width) * maxWidth;
+          } else {
+            newHeight = maxHeight;
+            newWidth = (img.width / img.height) * maxHeight;
+          }
+
+          // Create a canvas and draw the image with the new dimensions
+          const canvas = document.createElement("canvas");
+          const ctx = canvas.getContext("2d");
+          canvas.width = newWidth;
+          canvas.height = newHeight;
+          ctx.drawImage(img, 0, 0, newWidth, newHeight);
+
+          // Convert the canvas content back to a data URL
+          canvas.toBlob(
+            (blob) => {
+              resolve(blob);
+            },
+            file.type,
+            0.7 // Adjust compression quality if needed
+          );
+        };
+
+        img.onerror = () => {
+          reject(new Error("Failed to load the image"));
+        };
+      };
+
+      reader.onerror = () => {
+        reject(new Error("Failed to read the file"));
+      };
+
+      reader.readAsDataURL(file);
+    });
+  };
+
+  const onDrop = useCallback(
+    async (acceptedFiles) => {
+      try {
+        const compressedImages = await Promise.all(
+          acceptedFiles.map(async (file) => {
+            const compressedBlob = await compressImage(file);
+            const compressedFile = new File([compressedBlob], file.name, {
+              type: compressedBlob.type,
+            });
+            return compressedFile;
+          })
+        );
+        // Now you can send the compressed images to the handleUpload function
+        handleUpload(compressedImages);
+      } catch (error) {
+        console.error("Error compressing images:", error);
+      }
+    },
+    [handleUpload]
+  );
+
+  console.log(uploadedImages);
+
+  // const onDrop = useCallback((acceptedFiles) => {
+  //   handleUpload(acceptedFiles);
+  // }, []);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
@@ -146,10 +222,17 @@ export default function PostCenter() {
           <div className="h-full w-full ">
             <div {...getRootProps()}>
               <input {...getInputProps()} />
-              {isDragActive ? (
+              {isDragActive && imageupload ? (
                 <p>Drop the files here ...</p>
               ) : (
                 <p>Drag 'n' drop some files here, or click to select files</p>
+              )}
+              {uploadedImages.length > 0 && (
+                <img
+                  src={uploadedImages}
+                  alt={`Uploaded ${uploadedImages.length}`}
+                  className="max-h-full max-w-full"
+                />
               )}
             </div>
           </div>
