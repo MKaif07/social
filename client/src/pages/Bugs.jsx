@@ -16,7 +16,7 @@ export default function Bugs() {
   };
   return (
     <div
-      className={`bg-${theme}-primary text-lg p-4 text-${theme}-tertiary h-[90.7vh] overflow-hidden`}
+      className={`bg-${theme}-primary text-lg p-4 text-${theme}-tertiary h-[100vh] overflow-hidden`}
     >
       <form
         className={`flex flex-col my-4 p-3 max-w-lg mx-auto bg-${theme}-secondary rounded-xl`}

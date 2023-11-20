@@ -44,11 +44,11 @@ export default function SignUp() {
     console.log(formData);
   };
   return (
-    <div className={`bg-${theme}-primary text-${theme}-tertiary h-[90.7vh]`}>
+    <div className={`bg-${theme}-primary text-${theme}-tertiary h-[100vh]`}>
       <div className="p-3 max-w-lg mx-auto">
         <h1 className="text-3xl text-center font-semibold my-7">Sign Up</h1>
         <form className="flex flex-col" onSubmit={handleSubmit}>
-          <div className="flex gap-4 flex-2">
+          <div className="flex flex-col md:flex-row gap-1 md:gap-4 flex-2">
             <input
               required
               type="text"
@@ -87,7 +87,7 @@ export default function SignUp() {
             id="password"
             onChange={handleChange}
           />
-          <div className="flex gap-4 flex-2">
+          <div className="flex gap-1 flex-col md:flex-row md:gap-4  flex-2">
             <input
               required
               type="text"

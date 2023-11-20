@@ -74,7 +74,7 @@ export default function Feed() {
 
   return (
     <div
-      className={`flex flex-col bg-${theme}-primary rounded-lg w-[90%] m-auto lg:w-[540px] h-fit py-7 mb-7`}
+      className={`flex flex-col bg-${theme}-primary rounded-lg w-[90%] mx-auto lg:w-[540px] h-fit py-7 mb-7`}
       // style={{ background: "#B0D9B1" }}
     >
       <ul className=" mt-1 mb-7">

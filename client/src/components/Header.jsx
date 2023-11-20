@@ -27,21 +27,23 @@ export default function Header() {
             <span className="title-word title-word-3">al</span>
           </h1>
         </Link>
-        <form>
-          <div
-            className={`flex justify-center w-28 md:w-full relative text-${theme}-tertiary p-2 font-semibold border-${theme}-contrasting border-2 items-center rounded-full`}
-            // style={{ background: "#D0E7D2", border: "2px #618264 solid" }}
-          >
-            <input
-              type="text"
-              placeholder="Search..."
-              className=" w-[80%] bg-transparent focus:outline-none pr-2 placeholder-current"
-            />
-            <button>
-              <IoMdSearch size={26} />
-            </button>
-          </div>
-        </form>
+        {currentUser && (
+          <form>
+            <div
+              className={`flex justify-center w-28 md:w-full relative text-${theme}-tertiary p-2 font-semibold border-${theme}-contrasting border-2 items-center rounded-full`}
+              // style={{ background: "#D0E7D2", border: "2px #618264 solid" }}
+            >
+              <input
+                type="text"
+                placeholder="Search..."
+                className=" w-[80%] bg-transparent focus:outline-none pr-2 placeholder-current"
+              />
+              <button>
+                <IoMdSearch size={26} />
+              </button>
+            </div>
+          </form>
+        )}
         {/* Created a switch */}
 
         <div
@@ -69,21 +71,23 @@ export default function Header() {
                   <IoMdChatbubbles size={26} />
                 </li>
               </Link>
-              <Link to="/bug">
+              {/* <Link to="/bug">
                 <li className="hidden md:block">
                   <FaBug size={26} />
                 </li>
-              </Link>
+              </Link> */}
             </>
           )}
 
           {currentUser ? (
             <Link to="/profile/edit">
-              <img
-                src={currentUser.picturePath}
-                alt="profile pic"
-                className="text-sm w-7 h-7 rounded-full"
-              />
+              <div className="rounded-full object-cover">
+                <img
+                  src={currentUser.picturePath}
+                  alt="profile pic"
+                  className="text-sm w-7 h-7 rounded-full object-cover"
+                />
+              </div>
             </Link>
           ) : (
             <Link to="/sign-in">
@@ -101,21 +105,23 @@ export default function Header() {
                   <IoMdChatbubbles size={26} />
                 </li>
               </Link>
-              <Link to="/bug">
+              {/* <Link to="/bug">
                 <li className="hidden md:block">
                   <FaBug size={26} />
                 </li>
-              </Link>
+              </Link> */}
             </>
           )}
 
           {currentUser ? (
             <Link to="/profile/edit">
-              <img
-                src={currentUser.picturePath}
-                alt="profile pic"
-                className="text-sm w-7 h-7 rounded-full"
-              />
+              <div className="rounded-full object-cover">
+                <img
+                  src={currentUser.picturePath}
+                  alt="profile pic"
+                  className="text-sm w-7 h-7 rounded-full object-cover"
+                />
+              </div>
             </Link>
           ) : (
             <Link to="/sign-in">

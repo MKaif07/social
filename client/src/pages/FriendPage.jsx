@@ -42,7 +42,7 @@ export default function FriendPage() {
 
   return (
     <div
-      className={`bg-${theme}-primary text-${theme}-tertiary md:flex md:justify-around w-full min-h-max h-[100vh]`}
+      className={`bg-${theme}-primary text-${theme}-tertiary md:flex md:justify-around w-full min-h-screen h-full`}
     >
       <div className="lg:flex lg:gap-28">
         <div className="flex flex-col">
@@ -58,11 +58,10 @@ export default function FriendPage() {
           />
           <FriendSide />
           <div className="sm:hidden sm:bg-black flex flex-col">
-            {/* <div className=""></div> */}
             <Feed />
           </div>
         </div>
-        <div className="hidden sm:flex sm:flex-col">
+        <div className={`hidden bg-${theme}-primary sm:flex sm:flex-col`}>
           {/* <div className="mt-10"></div> */}
           <Feed />
         </div>

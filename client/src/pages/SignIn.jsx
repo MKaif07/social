@@ -52,7 +52,7 @@ export default function SignIn() {
   };
 
   return (
-    <div className={`bg-${theme}-primary text-${theme}-tertiary h-[90.7vh]`}>
+    <div className={`bg-${theme}-primary text-${theme}-tertiary h-[100vh]`}>
       <div className="p-3 max-w-lg mx-auto">
         <h1 className="text-3xl text-center font-semibold my-7">Sign in</h1>
         <form className="flex flex-col" onSubmit={handleSubmit}>

@@ -80,24 +80,18 @@ export default function PostCenter() {
         img.src = event.target.result;
 
         img.onload = () => {
-          const maxWidth = 480;
-          const maxHeight = 320;
-
-          // Calculate the new dimensions while maintaining aspect ratio
-          let newWidth, newHeight;
-          if (img.width > img.height) {
-            newWidth = maxWidth;
-            newHeight = (img.height / img.width) * maxWidth;
-          } else {
-            newHeight = maxHeight;
-            newWidth = (img.width / img.height) * maxHeight;
-          }
-
-          // Create a canvas and draw the image with the new dimensions
           const canvas = document.createElement("canvas");
           const ctx = canvas.getContext("2d");
+
+          // Calculate new dimensions while maintaining aspect ratio
+          const newWidth = img.width / 2;
+          const newHeight = img.height / 2;
+
+          // Resize the canvas to the new dimensions
           canvas.width = newWidth;
           canvas.height = newHeight;
+
+          // Draw the image on the canvas
           ctx.drawImage(img, 0, 0, newWidth, newHeight);
 
           // Convert the canvas content back to a data URL
@@ -152,12 +146,16 @@ export default function PostCenter() {
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
+    maxFiles: 1,
     accept: {
       "image/.*": [".png", ".jpeg", ".jpg"],
     },
   });
 
   const handlePost = async (e) => {
+    setFormData({ userId: currentUser._id });
+    setUploadedImages([]);
+    setDrop(!drop);
     const validated = validator(formData);
     if (Object.keys(validated).length < 2) {
       console.log("atleast add desc or a picture");
@@ -182,6 +180,8 @@ export default function PostCenter() {
       dispatch(setNewPostFail(error.message));
     }
   };
+
+  useEffect(() => {}, [uploadedImages]);
 
   return (
     <div
@@ -209,6 +209,7 @@ export default function PostCenter() {
             className="bg-transparent focus:outline-none py-2 px-2 w-full"
             id="description"
             onChange={handleChange}
+            value={formData?.text}
           />
         </div>
       </div>
@@ -216,7 +217,7 @@ export default function PostCenter() {
         <div
           className={`h-${
             drop ? 28 : 0
-          } w-11/12 border-dashed border-2 mx-auto my-4 p-2 transition-all items-center align-middle`}
+          } w-11/12 border-dashed border-2 mx-auto mt-7 p-2 transition-all items-center align-middle`}
         >
           {/* <Dropbox /> */}
           <div className="h-full w-full ">
@@ -227,17 +228,21 @@ export default function PostCenter() {
               ) : (
                 <p>Drag 'n' drop some files here, or click to select files</p>
               )}
-              {uploadedImages.length > 0 && (
-                <img
-                  src={uploadedImages}
-                  alt={`Uploaded ${uploadedImages.length}`}
-                  className="max-h-full max-w-full"
-                />
-              )}
             </div>
           </div>
         </div>
       )}
+      <div className="mx-auto p-2">
+        {uploadedImages.length > 0 && (
+          <img
+            src={uploadedImages}
+            alt={`Uploaded ${uploadedImages.length}`}
+            className="h-80 w-[30rem] object-cover rounded-xl"
+            onClick={() => setUploadedImages([])}
+          />
+        )}
+      </div>
+
       <hr className="mx-4 my-3" />
       <div className="flex flex-row justify-around items-center">
         <div
