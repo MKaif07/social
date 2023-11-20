@@ -36,9 +36,9 @@ export default function App() {
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/sign-up" element={<SignUp />} />
         </Route>
-        <Route path="/bug" element={<Bugs />} />
         <Route element={<PrivateRoute />}>
           <Route path="/" element={<Home />} />
+          <Route path="/bug" element={<Bugs />} />
           <Route path="/chat" element={<Chat />} />
           <Route path="/profile" element={<UserPage />} />
           <Route path="/profile/edit" element={<Profile />} />

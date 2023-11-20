@@ -48,7 +48,7 @@ export default function FriendSide() {
       >
         <h1 className="text-2xl ml-7">Friends List</h1>
         <ul>
-          {friends &&
+          {!(currentUser.friends.message === "Unauthorized") &&
             friends.map((friend) => (
               <li className="py-1" key={friend._id}>
                 <FriendBar

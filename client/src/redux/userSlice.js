@@ -16,6 +16,11 @@ const userSlice = createSlice({
       state.error = null;
       state.loading = false;
     },
+    signInPage: (state) => {
+      state.currentUser = null;
+      state.error = null;
+      state.loading = false;
+    },
     setTheme: (state, action) => {
       state.theme = action.payload;
     },
@@ -115,5 +120,6 @@ export const {
   setFriendSuccess,
   setFriendFail,
   setFriendFriends,
+  signInPage
 } = userSlice.actions;
 export default userSlice.reducer;

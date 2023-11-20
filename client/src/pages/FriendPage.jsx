@@ -42,7 +42,7 @@ export default function FriendPage() {
 
   return (
     <div
-      className={`bg-${theme}-primary text-${theme}-tertiary md:flex md:justify-around w-full`}
+      className={`bg-${theme}-primary text-${theme}-tertiary md:flex md:justify-around w-full min-h-max h-[100vh]`}
     >
       <div className="lg:flex lg:gap-28">
         <div className="flex flex-col">
@@ -58,7 +58,7 @@ export default function FriendPage() {
           />
           <FriendSide />
           <div className="sm:hidden sm:bg-black flex flex-col">
-            <div className=""></div>
+            {/* <div className=""></div> */}
             <Feed />
           </div>
         </div>

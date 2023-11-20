@@ -9,7 +9,7 @@ import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { setPost } from "../redux/postSlice";
-import { setFriends } from "../redux/userSlice";
+import { setFriends, signInPage } from "../redux/userSlice";
 import { useState } from "react";
 import FriendBar from "./FriendBar";
 
@@ -18,9 +18,15 @@ export default function Post({ post }) {
   const dispatch = useDispatch();
   const [like, setLike] = useState(Boolean(post.likes[currentUser._id]));
   const likeCount = Object.keys(post.likes).length;
-  const friends = currentUser?.friends;
-  const isFriend = friends.find((friend) => friend._id === post.userRef);
 
+  const unAuth = currentUser.friends.message === "Unauthorized";
+  if (unAuth) {
+    dispatch(signInPage());
+  }
+  const friends = currentUser?.friends;
+  const isFriend = unAuth
+    ? null
+    : friends.find((friend) => friend._id === post.userRef);
   const handleLike = async () => {
     // instantaneous liking and disliking
     setLike(!like);

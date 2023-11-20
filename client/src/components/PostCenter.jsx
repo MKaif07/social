@@ -112,14 +112,16 @@ export default function PostCenter() {
       className={`flex flex-col bg-${theme}-secondary rounded-lg w-[90%] m-auto lg:w-[540px] h-fit py-7 shadow-lg mt-10 mb-7`}
       // style={{ background: "#B0D9B1" }}
     >
-      <div className="flex flex-row px-3 gap-3 md:px-7 md:gap-7 align-middle items-center rounded-xl">
-        <Link to={"/profile"}>
-          <img
-            src={currentUser.picturePath}
-            alt="img"
-            className="w-[3.5rem] h-[3.5rem] object-cover rounded-full"
-          />
-        </Link>
+      <div className="flex flex-row px-3 gap-3 md:px-7 align-middle items-center">
+        <div className="w-20 h-15 rounded-full">
+          <Link to={"/profile"}>
+            <img
+              src={currentUser.picturePath}
+              alt="img"
+              className="w-[3.5rem] h-[3.5rem] object-cover rounded-full"
+            />
+          </Link>
+        </div>
 
         <div
           className={`bg-${theme}-contrasting text-dark-primary p-2 rounded-full w-full`}
@@ -128,7 +130,7 @@ export default function PostCenter() {
           <input
             type="text"
             placeholder="what's on your mind"
-            className="bg-transparent focus:outline-none py-2 px-2"
+            className="bg-transparent focus:outline-none py-2 px-2 w-full"
             id="description"
             onChange={handleChange}
           />

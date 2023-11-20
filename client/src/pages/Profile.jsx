@@ -111,7 +111,7 @@ export default function Profile() {
   };
 
   return (
-    <div className={`bg-${theme}-primary text-${theme}-tertiary `}>
+    <div className={`bg-${theme}-primary text-${theme}-tertiary h-[100vh]`}>
       <div className={`p-3 max-w-lg mx-auto`}>
         <h1 className="text-3xl font-semibold text-center my-5">Profile</h1>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
